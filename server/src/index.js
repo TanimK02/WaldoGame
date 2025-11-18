@@ -20,13 +20,13 @@ app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        
+
         const allowedOrigins = [
             'http://localhost:5173',
             'https://waldo-game.vercel.app',
             'https://waldogame-production.up.railway.app'
         ];
-        
+
         // Allow any vercel.app subdomain
         if (origin.includes('vercel.app') || allowedOrigins.includes(origin)) {
             callback(null, true);
@@ -57,8 +57,12 @@ app.use(session({
     }),
 }));
 
-// Debug middleware
+// Debug middleware - handle X-Session-Id header
 app.use((req, res, next) => {
+    const sessionIdFromHeader = req.headers['x-session-id'];
+    if (sessionIdFromHeader) {
+        req.sessionID = sessionIdFromHeader;
+    }
     console.log('Session ID:', req.sessionID);
     console.log('Session data:', req.session);
     next();
