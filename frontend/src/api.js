@@ -1,16 +1,5 @@
 const API_BASE = 'https://waldogame-production.up.railway.app/api';
 
-// Store session ID in memory
-let sessionId = null;
-
-export function getSessionId() {
-    return sessionId;
-}
-
-export function setSessionId(id) {
-    sessionId = id;
-}
-
 export async function getMaps() {
     const res = await fetch(`${API_BASE}/maps`, {
         credentials: 'include'
@@ -21,11 +10,9 @@ export async function getMaps() {
 }
 
 export async function initializeGame(mapId) {
-    const headers = { 'Content-Type': 'application/json' };
-
     const res = await fetch(`${API_BASE}/game/initialize`, {
         method: 'POST',
-        headers,
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ mapId })
     });
@@ -33,25 +20,13 @@ export async function initializeGame(mapId) {
         const error = await res.json();
         throw new Error(error.error || 'Failed to initialize game');
     }
-    const data = await res.json();
-
-    // Store session ID from response
-    if (data.sessionId) {
-        setSessionId(data.sessionId);
-    }
-
-    return data;
+    return res.json();
 }
 
 export async function validateCharacter(characterKey, clickCoords) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (sessionId) {
-        headers['X-Session-Id'] = sessionId;
-    }
-
     const res = await fetch(`${API_BASE}/game/validate`, {
         method: 'POST',
-        headers,
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ characterKey, clickCoords })
     });
@@ -63,14 +38,9 @@ export async function validateCharacter(characterKey, clickCoords) {
 }
 
 export async function submitScore(playerName) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (sessionId) {
-        headers['X-Session-Id'] = sessionId;
-    }
-
     const res = await fetch(`${API_BASE}/leaderboard`, {
         method: 'POST',
-        headers,
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ playerName })
     });

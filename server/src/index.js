@@ -44,12 +44,6 @@ app.use(session({
 
 // Debug middleware
 app.use((req, res, next) => {
-    // Check for session ID in custom header
-    const sessionIdFromHeader = req.headers['x-session-id'];
-    if (sessionIdFromHeader) {
-        req.sessionID = sessionIdFromHeader;
-    }
-
     console.log('Session ID:', req.sessionID);
     console.log('Session data:', req.session);
     next();
