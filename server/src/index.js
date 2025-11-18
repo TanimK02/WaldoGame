@@ -32,7 +32,6 @@ app.use(session({
         maxAge: 1000 * 60 * 60,
         secure: true,
         sameSite: 'none',
-        domain: undefined,
     },
     store: new PrismaSessionStore(prisma, {
         checkPeriod: 2 * 60 * 1000,
