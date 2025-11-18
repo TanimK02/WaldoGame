@@ -70,10 +70,10 @@ export const initializeGame = async (req, res) => {
 export const validateCharacterClick = async (req, res) => {
     const { characterKey, clickCoords } = req.body;
     const session = req.session;
-    
+
     console.log('Validate request - Session ID:', req.sessionID);
     console.log('Validate request - Session data:', session);
-    
+
     if (!characterKey || !clickCoords || typeof clickCoords.x !== 'number' || typeof clickCoords.y !== 'number') {
         return res.status(400).json({ error: "Invalid request body" });
     }
@@ -110,7 +110,7 @@ export const validateCharacterClick = async (req, res) => {
         return res.status(500).json({ error: "Failed to validate character" });
     }
     const { x, y } = character;
-    const tolerance = 0.02;
+    const tolerance = 0.06;
 
     const dx = clickCoords.x - x;
     const dy = clickCoords.y - y;
@@ -154,104 +154,6 @@ export const validateCharacterClick = async (req, res) => {
     });
 };
 
-
-// ### 4. Submit Score to Leaderboard
-// **Endpoint:** `POST /api/leaderboard`
-
-// **Description:** Submits a winning session to the leaderboard with player name
-
-// **Request Body:**
-// ```json
-// {
-//   "playerName": "John Doe"
-// }
-// ```
-
-// **Response (201 Created):**
-// ```json
-// {
-//   "entry": {
-//     "id": "score_1234567890",
-//     "playerName": "John Doe",
-//     "mapId": 1,
-//     "time": 45,
-//     "timestamp": 1700000000000
-//   },
-//   "message": "Score submitted successfully!"
-// }
-// ```
-
-// **Error Responses:**
-// ```json
-// 404: { "error": "Session not found" }
-// 400: { "error": "Game not won yet" }
-// ```
-
-// **Server-side logic:**
-// - Get session from request (cookie/header/token)
-// - Validate session exists and is won
-// - Calculate time from session: (endTime - startTime) / 1000
-// - Create leaderboard entry with: id, playerName, mapId, time, timestamp
-// - Save to database
-// - Return entry
-
-// ---
-
-// ### 5. Get Leaderboard
-// **Endpoint:** `GET /api/leaderboard`
-
-// **Description:** Returns paginated leaderboard, optionally filtered by map
-
-// **Query Parameters:**
-// - `mapId` (optional): Filter by specific map ID, omit for all maps
-// - `page` (optional): Page number, defaults to 1
-
-// **Examples:**
-// - `/api/leaderboard` - All maps, page 1
-// - `/api/leaderboard?mapId=1` - Map 1 only, page 1
-// - `/api/leaderboard?page=2` - All maps, page 2
-// - `/api/leaderboard?mapId=1&page=3` - Map 1 only, page 3
-
-// **Response:**
-// ```json
-// {
-//   "scores": [
-//     {
-//       "id": "score_1234567890",
-//       "playerName": "John Doe",
-//       "mapId": 1,
-//       "time": 45,
-//       "timestamp": 1700000000000,
-//       "place": 1
-//     },
-//     {
-//       "id": "score_1234567891",
-//       "playerName": "Jane Smith",
-//       "mapId": 1,
-//       "time": 52,
-//       "timestamp": 1700000001000,
-//       "place": 2
-//     }
-//   ],
-//   "pagination": {
-//     "currentPage": 1,
-//     "totalPages": 5,
-//     "totalScores": 47,
-//     "itemsPerPage": 10
-//   }
-// }
-// ```
-
-// **Server-side logic:**
-// - Query leaderboard entries
-// - Filter by mapId if provided
-// - Sort by time ascending (fastest first)
-// - Paginate: 10 items per page
-// - Calculate pagination metadata
-// - Add `place` to each entry (1-indexed rank)
-// - Return scores and pagination info
-
-// ---
 
 export const submitScore = async (req, res) => {
     const { playerName } = req.body;
