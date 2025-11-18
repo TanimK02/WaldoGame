@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { initializeGame, validateCharacter, submitScore, getLeaderboard } from "../../api.js";
+import { initializeGame, validateCharacter, submitScore, getLeaderboard, setSessionId } from "../../api.js";
 import styles from "./Map.module.css";
 import { useImageClick } from "./useImgClick.jsx";
 import { useState, useEffect } from "react";
@@ -104,6 +104,9 @@ export default function Map() {
     };
 
     const handlePlayAgain = async () => {
+        // Clear session ID
+        setSessionId(null);
+
         // Reset all game state
         setShowLeaderboard(false);
         setShowNamePrompt(false);

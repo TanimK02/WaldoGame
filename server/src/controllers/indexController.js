@@ -43,6 +43,9 @@ export const initializeGame = async (req, res) => {
 
     req.session.charactersFound = charactersFound;
 
+    console.log('Before save - Session ID:', req.sessionID);
+    console.log('Before save - Session data:', req.session);
+
     const characters = map.characters.map(char => ({
         key: char.key,
         name: char.name,
@@ -56,7 +59,10 @@ export const initializeGame = async (req, res) => {
             return res.status(500).json({ message: "Failed to save session" });
         }
 
+        console.log('After save - Session saved successfully');
+
         return res.status(200).json({
+            sessionId: req.sessionID,
             map: {
                 id: map.id,
                 name: map.name,
@@ -70,10 +76,10 @@ export const initializeGame = async (req, res) => {
 export const validateCharacterClick = async (req, res) => {
     const { characterKey, clickCoords } = req.body;
     const session = req.session;
-    
+
     console.log('Validate request - Session ID:', req.sessionID);
     console.log('Validate request - Session data:', session);
-    
+
     if (!characterKey || !clickCoords || typeof clickCoords.x !== 'number' || typeof clickCoords.y !== 'number') {
         return res.status(400).json({ error: "Invalid request body" });
     }
