@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Map {
+  id          Int                @id @default(autoincrement())
+  name        String
+  url         String             @unique
+  characters  Character[]
+  leaderboard LeaderboardEntry[]
+}
+
+model Character {
+  id       Int     @id @default(autoincrement())
+  key      String
+  name     String
+  imageUrl String?
+  x        Float
+  y        Float
+  mapId    Int
+  map      Map     @relation(fields: [mapId], references: [id], onDelete: Cascade)
+
+  @@unique([mapId, key])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+  expires   BigInt   @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LeaderboardEntry {
+  id         Int      @id @default(autoincrement())
+  playerName String
+  timeTaken  Int
+  mapId      Int
+  map        Map      @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}

@@ -1,0 +1,284 @@
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.formGroup input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.previewSection {
+    margin-top: 1rem;
+}
+
+.clickHint {
+    font-size: 0.95rem;
+    color: #2196F3;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    background: #e3f2fd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.preview {
+    position: relative;
+    max-width: 100%;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.marker {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+.marker:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.activeMarker {
+    background: rgba(76, 175, 80, 0.9);
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.1);
+    }
+}
+
+.charactersSection {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
+}
+
+.charactersSection h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.characterCard {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.characterCard:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.activeCard {
+    border: 2px solid #4CAF50;
+    background: #f1f8f4;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.characterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.characterHeader h4 {
+    margin: 0;
+    color: #555;
+}
+
+.removeBtn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.removeBtn:hover {
+    background: #c82333;
+}
+
+.characterFields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.characterFields input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.addBtn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.addBtn:hover {
+    background: #0056b3;
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 1rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: #45a049;
+}
+
+.submitBtn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.characterImageSection {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.characterImageSection label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.characterImageSection input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+.charPreview {
+    margin-top: 0.75rem;
+    max-width: 150px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.charPreview img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

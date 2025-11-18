@@ -1,0 +1,178 @@
+.leaderboardPage {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 1.5rem;
+}
+
+.filterSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filterSection label {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.mapSelect {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.mapSelect:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.leaderboardContainer {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.noScores {
+    padding: 3rem;
+    text-align: center;
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+.leaderboardHeader {
+    display: grid;
+    grid-template-columns: 80px 1fr 150px 100px;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    font-weight: 700;
+    color: #4b5563;
+}
+
+.leaderboardEntry {
+    display: grid;
+    grid-template-columns: 80px 1fr 150px 100px;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.leaderboardEntry:hover {
+    background: #f9fafb;
+}
+
+.leaderboardEntry:last-child {
+    border-bottom: none;
+}
+
+.place {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.place1 {
+    color: #fbbf24;
+    font-size: 1.3rem;
+}
+
+.place2 {
+    color: #9ca3af;
+    font-size: 1.2rem;
+}
+
+.place3 {
+    color: #d97706;
+    font-size: 1.15rem;
+}
+
+.name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.mapName {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.time {
+    font-weight: 700;
+    color: #667eea;
+    font-family: monospace;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.pageButton {
+    padding: 0.75rem 1.5rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.pageButton:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.pageInfo {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+@media (max-width: 768px) {
+
+    .leaderboardHeader,
+    .leaderboardEntry {
+        grid-template-columns: 60px 1fr 80px;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .mapName {
+        display: none;
+    }
+
+    .headerMap {
+        display: none;
+    }
+}
