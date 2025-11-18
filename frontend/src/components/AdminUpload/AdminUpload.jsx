@@ -81,7 +81,7 @@ export default function AdminUpload() {
                 }
             });
 
-            const res = await fetch('http://localhost:3000/api/admin/upload', {
+            const res = await fetch('https://waldogame-production.up.railway.app/api/admin/upload', {
                 method: 'POST',
                 body: formData
             });
