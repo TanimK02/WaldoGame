@@ -57,7 +57,6 @@ export const initializeGame = async (req, res) => {
         }
 
         return res.status(200).json({
-            sessionId: req.sessionID,
             map: {
                 id: map.id,
                 name: map.name,

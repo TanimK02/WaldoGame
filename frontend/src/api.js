@@ -1,7 +1,5 @@
 const API_BASE = 'https://waldogame-production.up.railway.app/api';
 
-let sessionId = null;
-
 export async function getMaps() {
     const res = await fetch(`${API_BASE}/maps`, {
         includeCredentials: 'include'
@@ -15,29 +13,21 @@ export async function initializeGame(mapId) {
     const res = await fetch(`${API_BASE}/game/initialize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        includeCredentials: 'include',
         body: JSON.stringify({ mapId })
     });
     if (!res.ok) {
         const error = await res.json();
         throw new Error(error.error || 'Failed to initialize game');
     }
-    const data = await res.json();
-    if (data.sessionId) {
-        sessionId = data.sessionId;
-    }
-    return data;
+    return res.json();
 }
 
 export async function validateCharacter(characterKey, clickCoords) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (sessionId) {
-        headers['X-Session-Id'] = sessionId;
-    }
     const res = await fetch(`${API_BASE}/game/validate`, {
         method: 'POST',
-        headers,
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        includeCredentials: 'include',
         body: JSON.stringify({ characterKey, clickCoords })
     });
     if (!res.ok) {
@@ -48,14 +38,10 @@ export async function validateCharacter(characterKey, clickCoords) {
 }
 
 export async function submitScore(playerName) {
-    const headers = { 'Content-Type': 'application/json' };
-    if (sessionId) {
-        headers['X-Session-Id'] = sessionId;
-    }
     const res = await fetch(`${API_BASE}/leaderboard`, {
         method: 'POST',
-        headers,
-        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        includeCredentials: 'include',
         body: JSON.stringify({ playerName })
     });
     if (!res.ok) {
