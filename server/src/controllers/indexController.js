@@ -70,10 +70,15 @@ export const initializeGame = async (req, res) => {
 export const validateCharacterClick = async (req, res) => {
     const { characterKey, clickCoords } = req.body;
     const session = req.session;
+    
+    console.log('Validate request - Session ID:', req.sessionID);
+    console.log('Validate request - Session data:', session);
+    
     if (!characterKey || !clickCoords || typeof clickCoords.x !== 'number' || typeof clickCoords.y !== 'number') {
         return res.status(400).json({ error: "Invalid request body" });
     }
     if (!session || !session.mapId) {
+        console.log('Session not found or no mapId');
         return res.status(404).json({ error: "Session not found" });
     }
 
