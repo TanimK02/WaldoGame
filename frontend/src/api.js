@@ -1,7 +1,9 @@
 const API_BASE = 'https://waldogame-production.up.railway.app/api';
 
 export async function getMaps() {
-    const res = await fetch(`${API_BASE}/maps`);
+    const res = await fetch(`${API_BASE}/maps`, {
+        credentials: 'include'
+    });
     if (!res.ok) throw new Error('Failed to fetch maps');
     const data = await res.json();
     return data.maps;
@@ -54,7 +56,9 @@ export async function getLeaderboard(mapId = null, page = 1) {
     if (mapId !== null) params.append('mapId', mapId);
     params.append('page', page);
 
-    const res = await fetch(`${API_BASE}/leaderboard?${params}`);
+    const res = await fetch(`${API_BASE}/leaderboard?${params}`, {
+        credentials: 'include'
+    });
     if (!res.ok) throw new Error('Failed to fetch leaderboard');
     return res.json();
 }
