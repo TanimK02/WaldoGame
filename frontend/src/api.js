@@ -2,7 +2,7 @@ const API_BASE = 'https://waldogame-production.up.railway.app/api';
 
 export async function getMaps() {
     const res = await fetch(`${API_BASE}/maps`, {
-        includeCredentials: 'include'
+        credentials: 'include'
     });
     if (!res.ok) throw new Error('Failed to fetch maps');
     const data = await res.json();
@@ -13,7 +13,7 @@ export async function initializeGame(mapId) {
     const res = await fetch(`${API_BASE}/game/initialize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        includeCredentials: 'include',
+        credentials: 'include',
         body: JSON.stringify({ mapId })
     });
     if (!res.ok) {
@@ -27,7 +27,7 @@ export async function validateCharacter(characterKey, clickCoords) {
     const res = await fetch(`${API_BASE}/game/validate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        includeCredentials: 'include',
+        credentials: 'include',
         body: JSON.stringify({ characterKey, clickCoords })
     });
     if (!res.ok) {
@@ -41,7 +41,7 @@ export async function submitScore(playerName) {
     const res = await fetch(`${API_BASE}/leaderboard`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        includeCredentials: 'include',
+        credentials: 'include',
         body: JSON.stringify({ playerName })
     });
     if (!res.ok) {
@@ -57,7 +57,7 @@ export async function getLeaderboard(mapId = null, page = 1) {
     params.append('page', page);
 
     const res = await fetch(`${API_BASE}/leaderboard?${params}`, {
-        includeCredentials: 'include'
+        credentials: 'include'
     });
     if (!res.ok) throw new Error('Failed to fetch leaderboard');
     return res.json();
