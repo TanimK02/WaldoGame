@@ -20,13 +20,13 @@ app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        
+
         const allowedOrigins = [
             'http://localhost:5173',
             'https://waldo-game.vercel.app',
             'https://waldogame-production.up.railway.app'
         ];
-        
+
         // Allow any vercel.app subdomain
         if (origin.includes('vercel.app') || allowedOrigins.includes(origin)) {
             callback(null, true);
@@ -55,6 +55,7 @@ app.use(session({
         sessionModelName: 'session',
         dbRecordIdFunction: undefined,
     }),
+    path: '/',
 }));
 
 // Debug middleware
