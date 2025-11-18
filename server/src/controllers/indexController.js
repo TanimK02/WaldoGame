@@ -49,13 +49,21 @@ export const initializeGame = async (req, res) => {
         imageUrl: char.imageUrl
     }));
 
-    return res.status(200).json({
-        map: {
-            id: map.id,
-            name: map.name,
-            url: map.url
-        },
-        characters
+    // Save session explicitly
+    req.session.save((err) => {
+        if (err) {
+            console.error('Session save error:', err);
+            return res.status(500).json({ message: "Failed to save session" });
+        }
+
+        return res.status(200).json({
+            map: {
+                id: map.id,
+                name: map.name,
+                url: map.url
+            },
+            characters
+        });
     });
 };
 
