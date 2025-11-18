@@ -26,8 +26,8 @@ app.use(session({
     cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: true,
+        sameSite: 'none',
     },
     store: new PrismaSessionStore(prisma, {
         checkPeriod: 2 * 60 * 1000,
