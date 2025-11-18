@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://waldo-game.vercel.app'],
     credentials: true
 }));
 app.use(express.json({ limit: '50mb' }));
@@ -26,7 +26,8 @@ app.use(session({
     cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60,
-        secure: false,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     },
     store: new PrismaSessionStore(prisma, {
         checkPeriod: 2 * 60 * 1000,
